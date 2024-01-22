@@ -147,9 +147,11 @@ func processAddOrRemove(action: Action){
                 totalPrice -= Double(amountInt) * itemsWithPrices[selectedOption]!
             } else {
                 print("Your cart does not have that amount of \(selectedOption)s to remove. I will remove \(userCart[selectedOption]!) from your cart.")
-                userCart[selectedOption]! = 0
+                //return back to the stock
                 itemsInStock[selectedOption]! += userCart[selectedOption]!
-                totalPrice = 0
+                //minus entire that item to the total price
+                totalPrice -= Double(userCart[selectedOption]!) * itemsWithPrices[selectedOption]!
+                userCart[selectedOption]! = 0
             }
     }
     //round the price to 2 decimal
@@ -199,7 +201,7 @@ func showAdminMenu(){
                           + "Remaining syrup: \(itemsInStock["syrup"]!) \n"
                           + "Remaining cups: \(itemsInStock["cup"]!) \n"
                           + "Remaining Inventory: \(remainingStock) \n"
-                          + "Total sales: $\(roundedPrice)")
+                          + "Total sales: $\(roundedPrice)\n")
                 case "3":
                     checkingItemsInStock()
                 case "4":
